@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+    <div class="col mainCenter">
+        <div class="d-flex justify-content-center m-3">
+            <img src={{asset('img/table-5356682_1280.jpg')}} alt="Restaurant" id="img-Restaurant" class="img-fluid img-thumbnail active">
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="d-flex justify-content-center align-items-center m-2">
+            <div class="elementor-container col-3 p-2">
+                <h2 style="font-size: 35px; letter-spacing: 2px;">
+                    <em>Bienvenue à l’hôtel restaurant <strong>Regatta</strong>, pour une parenthèse de douceur, les pieds dans l’eau</em>
+                </h2>
+            </div>
+            <div class="row elementor-container col-5">
+                    <p>Vous rêvez de bleu à perte de vue, de soleil, d’un grand bol d’air iodé ? Vous avez besoin de vous ressourcer, de réveiller vos sens ou simplement découvrir l’ile d’Oléron ?</p>
+
+                    <p>Dans un cadre exceptionnel, naturel et préservé, notre hôtel et restaurant 3 étoiles à Oléron, vous attend pour vivre une expérience hors du temps. Au programme, nous vous proposons d’étonner vos papilles autour d’une cuisine créative et colorée, de profiter des charmes de l’ile d’Oléron et de vous endormir aux bruits des vagues.</p>
+
+                    <p>Toutes nos équipes apporteront une attention particulière à vos besoins pour que vous puissiez réveillez vos sens et profitez de votre escale.</p>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
