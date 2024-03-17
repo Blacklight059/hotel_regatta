@@ -352,3 +352,10 @@ em {
     -webkit-text-fill-color: transparent;
     transform: scale(2.5);
   }
+
+/* Homepage*/
+
+.quotes {
+    font-size: 35px;
+    letter-spacing: 2px;
+}
