@@ -30,10 +30,10 @@
                             <span></span>
                         </button>
                         <div class="navlinks-container">
-                            <a href="#" aria-current="page">Accueil</a>
-                            <a href="#">Hôtel</a>
-                            <a href="#">Restaurant</a>
-                            <a href="#">Contact</a>
+                            <a href="{{ path('Homepage') }}">Accueil</a>
+                            <a href="{{ path('app_hotel') }}">Hôtel</a>
+                            <a href="{{ path('app_restaurant') }}">Restaurant</a>
+                            <a href="{{ path('app_contact') }}">Contact</a>
                         </div>
                     </div>
 
@@ -50,7 +50,7 @@
             </header>
             {% block body %}{% endblock %}
             <footer>
-                <div class="justify-content-center p-4" id="hours">
+                <div class="position-absolute justify-content-center p-4" id="hours">
                     <div class="container">
                         <div class="row text-center align-items-baseline ">
                             <div class="d-inline col-lg-4 col-md-6 col-12">

@@ -359,3 +359,14 @@ em {
     font-size: 35px;
     letter-spacing: 2px;
 }
+
+/* presentation */
+
+.presentation {
+    background-color: #D67940;
+    color: #ffff;
+}
+
+.menu {
+    background-color: #CCD9E2;
+}
