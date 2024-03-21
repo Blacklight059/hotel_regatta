@@ -14,7 +14,7 @@
 /* header */
 
 /* navbar */
-*,
+
 ::before,
 ::after {
   box-sizing: border-box;
@@ -87,9 +87,10 @@ nav {
   margin-left: auto;
 }
 
-.sign-btns button {
+.sign-btns a {
   font-size: 16px;
   min-width: 90px;
+  text-decoration: none;
   padding: 10px 5px;
   margin: 0 5px;
   border-radius: 5px;
@@ -97,11 +98,21 @@ nav {
   border: none;
 }
 
-.btn-connexion {
+#btn-connexion {
   border: none;
-  background: #6F4849;
-  color: white;
+  text-decoration: none;
+  background: #CCD9E2;
+
 }
+
+#btn-connexion:hover {
+    border: none;
+    text-decoration: none;
+    background: #6F4849;  
+    color: white;
+
+  }
+
 .user-toggler {
   display: none;
 }
@@ -192,7 +203,6 @@ nav {
     margin: 10px 0px;
   }
 
-
   .nav-authentication {
     order: 3;
     margin-left: 0;
@@ -220,7 +230,6 @@ nav {
     font-size: 20px;
   }
 }
-        
 
 #banner {
     background-color: #D67940;
@@ -237,6 +246,8 @@ nav {
     width: 100%;
     background-color: #285185;
     color: white;
+    position: absolute;
+    bottom: 0;
 }
 
 .logo {
@@ -252,11 +263,6 @@ nav {
 
 #navbarNav  {
     background-color: #D67940;
-}
-
-#btn-connexion {
-    background-color: #05445E;
-    color: white;
 }
 
 #reset-filters{
@@ -297,8 +303,6 @@ nav {
 em {
     font-style: italic;
 }
-
-/* footer */
 
 /* Social networks */
 
@@ -369,4 +373,21 @@ em {
 
 .menu {
     background-color: #CCD9E2;
+}
+
+.contact_form {
+    background-color: #285185;
+}
+
+.contact_title {
+    background-color: #D67940;
+    color: #ffff;
+}
+
+#email {
+    color: #ffff;
+}
+
+#password {
+    color: #ffff;
 }
