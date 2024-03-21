@@ -38,12 +38,22 @@
                     </div>
 
                     <div class="nav-authentication">
-                        <a href="{{ path('app_login') }}" class="user-toggler" aria-label="Sign in page">
-                        <img src={{asset('img/ressources/user.svg')}} alt="user icon" />
-                        </a>
-                        <div class="sign-btns">
-                            <a href="{{ path('app_login') }}" class="btn-connexion p-3">Connexion</a>
-                        </div>
+                        {% if app.user %}
+                            <div class="navlinks-container">
+                                <span class="nav-link">Bienvenue !</span>
+                                <a class="nav-link" href="">Gestion des chambres</a>
+                                <a class="nav-link" href="">Gestion des menus</a>
+                                <a class="nav-link" href="">Gestion des plats</a>
+                                <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
+                            </div>
+                        {% else %}
+                            <a href="{{ path('app_login') }}" class="user-toggler" aria-label="Sign in page">
+                                <img src={{asset('img/ressources/user.svg')}} alt="user icon" />
+                            </a>
+                            <div class="sign-btns">
+                                <a href="{{ path('app_login') }}" class="btn-connexion p-3">Connexion</a>
+                            </div>
+                        {% endif %}
                     </div>
                 </nav>
 
