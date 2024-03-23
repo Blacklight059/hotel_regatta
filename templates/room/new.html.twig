@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Room{% endblock %}
+
+{% block body %}
+    <h3 class="quotes p-4 shadow">Création d'une nouvelle chambre</h3>
+
+    {{ include('room/_form.html.twig') }}
+
+    <a href="{{ path('app_room_index') }}">Retour à la liste</a>
+{% endblock %}
