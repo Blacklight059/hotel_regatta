@@ -42,8 +42,10 @@
                             <div class="navlinks-container">
                                 <span class="nav-link">Bienvenue !</span>
                                 <a class="nav-link" href="{{ path('app_room_index') }}">Gestion des chambres</a>
-                                <a class="nav-link" href="">Gestion des menus</a>
-                                <a class="nav-link" href="">Gestion des plats</a>
+                                <a class="nav-link" href="{{ path('app_menu_index') }}">Gestion des menus</a>
+                                <a class="nav-link" href="{{ path('app_starter_index') }}">Gestion des entrées</a>
+                                <a class="nav-link" href="{{ path('app_dish_index') }}">Gestion des plats</a>
+                                <a class="nav-link" href="{{ path('app_dessert_index') }}">Gestion des desserts</a>
                                 <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
                             </div>
                         {% else %}

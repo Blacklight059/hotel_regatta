@@ -3,7 +3,8 @@
 {% block title %}Starter{% endblock %}
 
 {% block body %}
-    <h1>Starter</h1>
+<div class="col-11 mx-auto">
+    <h3 class="quotes p-4 shadow">Starter</h3>
 
     <table class="table">
         <tbody>
@@ -27,4 +28,5 @@
     <a href="{{ path('app_starter_edit', {'id': starter.id}) }}">edit</a>
 
     {{ include('starter/_delete_form.html.twig') }}
+</div>
 {% endblock %}
