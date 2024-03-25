@@ -3,9 +3,12 @@
 {% block title %}New Dish{% endblock %}
 
 {% block body %}
-    <h1>Create new Dish</h1>
+<div class="col-lg-4 col-md-6 col-11 m-4 mx-auto">
+
+    <h3 class="quotes p-4 shadow">Créer un nouveau plat</h3>
 
     {{ include('dish/_form.html.twig') }}
 
-    <a href="{{ path('app_dish_index') }}">back to list</a>
+    <a href="{{ path('app_dish_index') }}">retour à la liste</a>
+</div>
 {% endblock %}
