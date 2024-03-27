@@ -25,7 +25,7 @@ class Room
     #[ORM\Column]
     private ?int $price = null;
 
-    #[ORM\OneToMany(targetEntity: Images::class, mappedBy: 'room')]
+    #[ORM\OneToMany(targetEntity: Images::class, mappedBy: 'room', orphanRemoval: true, cascade: ['persist'])]
     private Collection $images;
 
     public function __construct()
@@ -82,10 +82,10 @@ class Room
         return $this->images;
     }
 
-    public function addImage(Images $image): static
+    public function addImage(Images $image): self
     {
         if (!$this->images->contains($image)) {
-            $this->images->add($image);
+            $this->images[] = $image;
             $image->setRoom($this);
         }
 
