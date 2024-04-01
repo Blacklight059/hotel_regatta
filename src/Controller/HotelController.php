@@ -33,14 +33,12 @@ class HotelController extends AbstractController
     {
         // contact form for room
 
-        $room = $roomRepository->findBy(['id' => $id])[0];
-        $roomName = $room->getTitle();
         $form = $this->createForm(ContactType::class);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
             $contactFormData = $form->getData();
             $subject = 'Demande de contact sur votre site de ' . 'email: ' . $contactFormData['email'] . ' téléphone: ' . $contactFormData['phoneNumber'];
-            $content = 'Pour la chambre' . $roomName . 'Début du séjour: ' . $contactFormData['dateStart'] . 'Fin du séjour: ' . $contactFormData['dateEnd'] . $contactFormData['name'] . $contactFormData['firstname'] . ' vous a envoyé le message suivant: ' . $contactFormData['message'];
+            $content =  $contactFormData['name'] . $contactFormData['firstname'] . ' vous a envoyé le message suivant: ' . $contactFormData['message'];
             $mailer->sendEmail(subject: $subject, content: $content);
             $this->addFlash('success', 'Votre message a été envoyé');
             return $this->redirectToRoute('homepage');

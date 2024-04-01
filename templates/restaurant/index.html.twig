@@ -25,29 +25,70 @@
         <div class="row m-4 p-3">           
             <div class="presentation col-lg-5 col-md-4 col-11 m-4 p-3 shadow">
                 <h2 class="quotes p-4 shadow">
-                    <em>Formule</em>
+                    <em>Menus</em>
                 </h2>
                 <div class="p-2">
-                    <p>Entrée + plat 43 €</p>
-
-                    <p>Dans le cadre unique de ce restaurant baigné de lumière, partagez, en toute convivialité, une expérience bistronomique véritablement unique et inoubliable à Oléron</p>
-
-                    <p>A travers une cuisine simple, sensible et iodée, le chef propose des plats qui font la part belle aux saveurs iodées et au riche terroir du Pays de l’île.</p>
-
+                {% for menu in menus %} 
+                    <h4 class="quotes p-4 shadow">
+                        {{ menu.name }}
+                    </h4>
+                    <p>{{ menu.price }}</p>
+                    <p>{{ menu.price }}</p>
+                    {% for starterMenu in menu.starter %}
+                        <h4 class="quotes p-4 shadow">
+                            {{ starterMenu.name }}
+                        </h4>
+                        <p>{{ starterMenu.price }}</p>
+                    {% endfor %} 
+                    {% for dishMenu in menu.dish %}
+                        <h4 class="quotes p-4 shadow">
+                            {{ dish.name }}
+                        </h4>
+                        <p>{{ dish.price }}</p>
+                    {% endfor %}
+                    {% for dessertMenu in menu.dessert %}
+                        <h4 class="quotes p-4 shadow">
+                            {{ dish.name }}
+                        </h4>
+                        <p>{{ dish.price }}</p>
+                    {% endfor %} 
+                {% endfor %}
                 </div>           
             </div>
             <div class="menu col-lg-5 col-md-4 col-11 m-4 p-3 shadow">
                 <h2 class="quotes p-4 shadow">
-                    <em>Les plats de la carte</em>
+                    <em>Les entrées</em>
                 </h2>
                 <div class="p-2">
-                    <p>Entrée + plat 43 €</p>
-
-                    <p>Dans le cadre unique de ce restaurant baigné de lumière, partagez, en toute convivialité, une expérience bistronomique véritablement unique et inoubliable à Oléron</p>
-
-                    <p>A travers une cuisine simple, sensible et iodée, le chef propose des plats qui font la part belle aux saveurs iodées et au riche terroir du Pays de l’île.</p>
-
-                </div>           
+                {% for starter in starters %} 
+                    <h4 class="quotes p-4 shadow">
+                        {{ starter.name }}
+                    </h4>
+                    <p>{{ starter.price }}</p>
+                {% endfor %} 
+                </div>
+                <h2 class="quotes p-4 shadow">
+                    <em>Les plats</em>
+                </h2>
+                <div class="p-2">
+                {% for dish in dishs %} 
+                    <h4 class="quotes p-4 shadow">
+                        {{ dish.name }}
+                    </h4>
+                    <p>{{ dish.price }}</p>
+                {% endfor %} 
+                </div>
+                <h2 class="quotes p-4 shadow">
+                    <em>Les desserts</em>
+                </h2>
+                <div class="p-2">
+                {% for dessert in desserts %} 
+                    <h4 class="quotes p-4 shadow">
+                        {{ dessert.name }}
+                    </h4>
+                    <p>{{ dessert.price }}</p>
+                {% endfor %} 
+                </div>
             </div>
         </div>
     </div>
