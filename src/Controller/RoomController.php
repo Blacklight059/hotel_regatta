@@ -4,9 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Images;
 use App\Entity\Room;
+use App\Form\ContactType;
 use App\Form\RoomType;
 use App\Repository\ImagesRepository;
 use App\Repository\RoomRepository;
+use App\Service\MailerService;
 use App\ServiceImages\PictureService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -130,7 +132,7 @@ class RoomController extends AbstractController
     }
 
     #[Route('/roomDetail/{id}', name: 'roomDetail')]
-    public function carDetail(        
+    public function roomDetail(        
     RoomRepository $roomRepository,
     Request $request, 
     int $id=null
@@ -145,5 +147,30 @@ class RoomController extends AbstractController
         ]);
     }
 
-}
+    #[Route('/contactRoom/{id}', name: 'app_room_contact')]
+    public function roomContact(
+        Request $request, 
+        MailerService $mailer,
+        RoomRepository $roomRepository,
+        int $id=null
+        )
+    {
+        // contact form for room
 
+        $room = $roomRepository->findBy(['id' => $id])[0];
+        $roomName = $room->getTitle();
+        $form = $this->createForm(ContactType::class);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()) {
+            $contactFormData = $form->getData();
+            $subject = 'Demande de contact sur votre site de ' . 'email: ' . $contactFormData['email'] . ' téléphone: ' . $contactFormData['phoneNumber'];
+            $content = 'Pour la chambre' . $roomName . 'Début du séjour: ' . $contactFormData['dateStart'] . 'Fin du séjour: ' . $contactFormData['dateEnd'] . $contactFormData['name'] . $contactFormData['firstname'] . ' vous a envoyé le message suivant: ' . $contactFormData['message'];
+            $mailer->sendEmail(subject: $subject, content: $content);
+            $this->addFlash('success', 'Votre message a été envoyé');
+            return $this->redirectToRoute('homepage');
+        }
+        return $this->render('room/contact.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+}

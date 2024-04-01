@@ -23,7 +23,7 @@ class HotelController extends AbstractController
         ]);
     }
     
-    #[Route('/contactRoom', name: 'app_room_contact')]
+    #[Route('/contactHotel', name: 'app_hotel_contact')]
     public function contact(
         Request $request, 
         MailerService $mailer,

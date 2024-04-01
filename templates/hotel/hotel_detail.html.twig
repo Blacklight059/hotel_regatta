@@ -14,7 +14,9 @@
                 <p>Lit grand confort  160×200</p>
                 <p>Salle de bain avec douche à l’italienne – Chauffe serviettes- Sèche-cheveux – Produits de toilette</p>
                 <p>Wi-Fi gratuit – Télévision écran plat – Coffre fort – Climatisation individuelle</p>
-                <a href="{{ path('app_room_contact') }}">Contact</a>
+                <div class="col {{ app.request.get('_route') == 'app_room_contact' }}">
+                    <a class="btn btn-lg m-3" id="btn-connexion" href="{{ path('app_room_contact', {'id': room.id}) }}">Réserver</a>
+                </div>
             </div>
             <div class="row col-lg-6 col-md-7 col-11 mx-auto p-2">
                 <div id="carouselExampleFade" class="carousel slide carousel-fade">
