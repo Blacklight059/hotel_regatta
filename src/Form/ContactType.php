@@ -21,25 +21,45 @@ class ContactType extends AbstractType
                 'attr' => [
                     'class' => 'form-control'
                 ],
-                'label' => 'Nom'
+                'label' => 'Nom',
+                'constraints' => [
+                    new NotBlank([
+                       'message' => 'Veuillez saisir votre nom'
+                    ])
+                ]
             ])
             ->add('firstname',TextType::class, [
                 'attr' => [
                     'class' => 'form-control'
                 ],
-                'label' => 'Prénom'
+                'label' => 'Prénom',
+                'constraints' => [
+                    new NotBlank([
+                       'message' => 'Veuillez saisir votre prénom'
+                    ])
+                ]
             ])
             ->add('email',EmailType::class, [
                 'attr' => [
                     'class' => 'form-control'
                 ],
-                'label' => 'E-mail'
+                'label' => 'E-mail',
+                'constraints' => [
+                    new NotBlank([
+                       'message' => 'Veuillez saisir votre email'
+                    ])
+                ]
             ])
             ->add('phoneNumber',TelType::class, [
                 'attr' => [
                     'class' => 'form-control'
                 ],
-                'label' => 'Téléphone'
+                'label' => 'Téléphone',
+                'constraints' => [
+                    new NotBlank([
+                       'message' => 'Veuillez saisir votre numéro de téléphone'
+                    ])
+                ]
             ])
             ->add('message', TextareaType::class, [
                 'required' => true, 
@@ -75,4 +95,5 @@ class ContactType extends AbstractType
     {
         $resolver->setDefaults([]);
     }
+
 }

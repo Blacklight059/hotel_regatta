@@ -12,15 +12,15 @@ use App\Service\MailerService;
 use App\ServiceImages\PictureService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\DataTransformer\DateTimeToStringTransformer;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('admin/room')]
 class RoomController extends AbstractController
 {
-    #[Route('/', name: 'app_room_index', methods: ['GET'])]
+    #[Route('admin/room', name: 'app_room_index', methods: ['GET'])]
     public function index(RoomRepository $roomRepository): Response
     {
         return $this->render('room/index.html.twig', [
@@ -28,7 +28,7 @@ class RoomController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_room_new', methods: ['GET', 'POST'])]
+    #[Route('admin/new', name: 'app_room_new', methods: ['GET', 'POST'])]
     public function new(
         Request $request, 
         EntityManagerInterface $entityManager,
@@ -67,7 +67,7 @@ class RoomController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_room_show', methods: ['GET'])]
+    #[Route('admin/{id}', name: 'app_room_show', methods: ['GET'])]
     public function show(Room $room): Response
     {
         return $this->render('room/show.html.twig', [
@@ -75,7 +75,7 @@ class RoomController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_room_edit', methods: ['GET', 'POST'])]
+    #[Route('admin/{id}/edit', name: 'app_room_edit', methods: ['GET', 'POST'])]
     public function edit(
         Request $request, 
         Room $room,
@@ -120,7 +120,7 @@ class RoomController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_room_delete', methods: ['POST'])]
+    #[Route('admin/{id}', name: 'app_room_delete', methods: ['POST'])]
     public function delete(Request $request, Room $room, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$room->getId(), $request->request->get('_token'))) {
@@ -141,7 +141,7 @@ class RoomController extends AbstractController
         $room = $roomRepository->findBy(['id' => $id])[0];
 
         return $this->render('hotel/hotel_detail.html.twig', [
-            'controller_name' => 'RoomController',
+            'controller_name' => 'roomDetail',
             'room' => $room
 
         ]);
@@ -156,18 +156,21 @@ class RoomController extends AbstractController
         )
     {
         // contact form for room
-
         $room = $roomRepository->findBy(['id' => $id])[0];
         $roomName = $room->getTitle();
         $form = $this->createForm(ContactType::class);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
             $contactFormData = $form->getData();
+            $dateStart = $contactFormData['dateStart'];
+            $dateEnd = $contactFormData['dateEnd'];
+            $dateStartToString = $dateStart->format('Y-m-d H:i:s');
+            $dateEndToString = $dateEnd->format('Y-m-d H:i:s');
             $subject = 'Demande de contact sur votre site de ' . 'email: ' . $contactFormData['email'] . ' téléphone: ' . $contactFormData['phoneNumber'];
-            $content = 'Pour la chambre' . $roomName . 'Début du séjour: ' . $contactFormData['dateStart'] . 'Fin du séjour: ' . $contactFormData['dateEnd'] . $contactFormData['name'] . $contactFormData['firstname'] . ' vous a envoyé le message suivant: ' . $contactFormData['message'];
+            $content = 'Pour la chambre' . $roomName . 'Début du séjour: ' . $dateStartToString . 'Fin du séjour: ' . $dateEndToString . $contactFormData['name'] . $contactFormData['firstname'] . ' vous a envoyé le message suivant: ' . $contactFormData['message'];
             $mailer->sendEmail(subject: $subject, content: $content);
             $this->addFlash('success', 'Votre message a été envoyé');
-            return $this->redirectToRoute('homepage');
+            return $this->redirectToRoute('Homepage', $request->query->all());
         }
         return $this->render('room/contact.html.twig', [
             'form' => $form->createView()

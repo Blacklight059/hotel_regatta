@@ -45,3 +45,32 @@ $(document).ready(function (){
         });
     });
 });
+
+// Sélectionner l'élément parent des avis
+var reviewsContainer = document.getElementById('reviews');
+
+// Durée de l'animation (en millisecondes)
+var animationDuration = 1000;
+
+// Fonction pour déplacer les avis
+function scrollReviews() {
+    // Sélectionner le premier avis
+    var firstReview = reviewsContainer.children[0];
+
+    // Calculer la largeur d'un seul avis
+    var reviewWidth = firstReview.offsetWidth;
+
+    // Animer le défilement
+    reviewsContainer.style.transition = 'transform ' + animationDuration + 'ms ease-in-out';
+    reviewsContainer.style.transform = 'translateX(-' + reviewWidth + 'px)'; // Déplacer vers la gauche
+
+    // Remettre le premier avis à la fin de la liste après l'animation
+    setTimeout(function() {
+        reviewsContainer.appendChild(firstReview);
+        reviewsContainer.style.transition = 'none'; // Réinitialiser la transition
+        reviewsContainer.style.transform = 'translateX(0)'; // Réinitialiser la position
+    }, animationDuration);
+}
+
+// Appeler la fonction scrollReviews toutes les quelques secondes (par exemple, toutes les 5 secondes)
+setInterval(scrollReviews, 5000); // Définir l'intervalle de temps en millisecondes

@@ -6,6 +6,10 @@
         <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <link href="{{ asset('styles/mobiscroll.jquery.min.css') }}" rel="stylesheet" />
+        <link rel="stylesheet" href="{{ asset('styles/star-rating.css') }}">
+        <link href="{{ asset('themes/krajee-fas/theme.css') }}" media="all" rel="stylesheet" type="text/css"/>
+        <link href="{{ asset('themes/krajee-svg/theme.css') }}" media="all" rel="stylesheet" type="text/css"/>        
+        <link rel="preconnect" href="https://fonts.googleapis.com">
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
@@ -47,6 +51,7 @@
                                 <a class="nav-link" href="{{ path('app_starter_index') }}">Gestion des entrées</a>
                                 <a class="nav-link" href="{{ path('app_dish_index') }}">Gestion des plats</a>
                                 <a class="nav-link" href="{{ path('app_dessert_index') }}">Gestion des desserts</a>
+                                <a class="nav-link" href="{{ path('show_review') }}">Gestion des avis</a>
                                 <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
                             </div>
                         {% else %}
@@ -124,7 +129,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.js"></script>
         <script src="https://kit.fontawesome.com/c2a84b56c5.js" crossorigin="anonymous"></script>
         <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.11/index.global.min.js'></script>
-        <script src="{{ asset('js/star-rating.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('star-rating.js') }}" type="text/javascript"></script>
         <script src="{{ ('themes/krajee-fas/theme.js') }}" type="text/javascript"></script>
         <script src="{{ ('themes/krajee-svg/theme.js') }}" type="text/javascript"></script>
         <script src="{{ asset('js/mobiscroll.jquery.min.js') }}" type="text/javascript"></script>

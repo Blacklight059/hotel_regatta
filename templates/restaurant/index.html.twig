@@ -33,24 +33,23 @@
                         {{ menu.name }}
                     </h4>
                     <p>{{ menu.price }}</p>
-                    <p>{{ menu.price }}</p>
                     {% for starterMenu in menu.starter %}
-                        <h4 class="quotes p-4 shadow">
+                        <p class="quotes p-4 shadow">
                             {{ starterMenu.name }}
-                        </h4>
+                        </p>
                         <p>{{ starterMenu.price }}</p>
                     {% endfor %} 
                     {% for dishMenu in menu.dish %}
-                        <h4 class="quotes p-4 shadow">
-                            {{ dish.name }}
-                        </h4>
-                        <p>{{ dish.price }}</p>
+                        <p class="quotes p-4 shadow">
+                            {{ dishMenu.name }}
+                        </p>
+                        <p>{{ dishMenu.price }}</p>
                     {% endfor %}
                     {% for dessertMenu in menu.dessert %}
-                        <h4 class="quotes p-4 shadow">
-                            {{ dish.name }}
-                        </h4>
-                        <p>{{ dish.price }}</p>
+                        <p class="quotes p-4 shadow">
+                            {{ dessertMenu.name }}
+                        </p>
+                        <p>{{ dessertMenu.price }}</p>
                     {% endfor %} 
                 {% endfor %}
                 </div>           
@@ -61,10 +60,10 @@
                 </h2>
                 <div class="p-2">
                 {% for starter in starters %} 
-                    <h4 class="quotes p-4 shadow">
+                    <p class="p-2 shadow">
                         {{ starter.name }}
-                    </h4>
-                    <p>{{ starter.price }}</p>
+                        {{ starter.price }} €
+                    </p>
                 {% endfor %} 
                 </div>
                 <h2 class="quotes p-4 shadow">
@@ -72,10 +71,10 @@
                 </h2>
                 <div class="p-2">
                 {% for dish in dishs %} 
-                    <h4 class="quotes p-4 shadow">
+                    <p class="p-2 shadow">
                         {{ dish.name }}
-                    </h4>
-                    <p>{{ dish.price }}</p>
+                        {{ dish.price }} €
+                    </p>
                 {% endfor %} 
                 </div>
                 <h2 class="quotes p-4 shadow">
@@ -83,10 +82,10 @@
                 </h2>
                 <div class="p-2">
                 {% for dessert in desserts %} 
-                    <h4 class="quotes p-4 shadow">
+                    <p class="p-2 shadow">
                         {{ dessert.name }}
-                    </h4>
-                    <p>{{ dessert.price }}</p>
+                        {{ dessert.price }} #
+                    </p>
                 {% endfor %} 
                 </div>
             </div>

@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ReviewController!{% endblock %}
+
+{% block body %}
+<div id="card-review" class="col-lg-6 col-md-8 col-11 mx-auto mt-4 mb-4 p-3 text-center shadow">
+    {{ include('review/_review.html.twig', {'button_label': 'Envoyer'}) }}
+
+</div>
+{% endblock %}

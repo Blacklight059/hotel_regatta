@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Post index{% endblock %}
+
+{% block body %}
+    <h2 class="m-3">Gestion des avis</h2>
+
+    <table class="table col-lg-4 col-md-6 col-11 m-4 p-3 shadow">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>note</th>
+                <th>email</th>
+                <th>pseudo</th>
+                <th>message</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for review in reviews %}
+            <tr>
+                <td>{{ review.id }}</td>
+                <td>{{ review.rating }}</td>
+                <td>{{ review.email }}</td>
+                <td>{{ review.pseudo }}</td>
+                <td>{{ review.comment }}</td>
+                <td>
+                    {% if(review.validate == false) %}
+                        <a href="{{ path('validation_review', {'id': review.id}) }}" role="button" class="btn btn-lg m-3" id="btn-connexion">Valider</a>
+                    {% else %}
+                    L'avis a été validé
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{{ path('remove_review', {'id': review.id}) }}" class="btn btn-lg m-3" id="btn-connexion">Supprimer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
