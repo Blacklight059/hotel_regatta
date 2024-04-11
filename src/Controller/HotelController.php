@@ -27,8 +27,6 @@ class HotelController extends AbstractController
     public function contact(
         Request $request, 
         MailerService $mailer,
-        RoomRepository $roomRepository,
-        int $id=null
         )
     {
         // contact form for room

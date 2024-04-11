@@ -112,6 +112,20 @@ nav {
     color: white;
 
   }
+  #reviewFormContainer {
+    border: none;
+    text-decoration: none;
+    background: #CCD9E2;
+  
+  }
+
+#reviewFormContainer:hover {
+    border: none;
+    text-decoration: none;
+    background: #6F4849;  
+    color: white;
+
+  }
 
 .user-toggler {
   display: none;

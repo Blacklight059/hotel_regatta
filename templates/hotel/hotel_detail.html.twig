@@ -15,7 +15,16 @@
                 <p>Salle de bain avec douche à l’italienne – Chauffe serviettes- Sèche-cheveux – Produits de toilette</p>
                 <p>Wi-Fi gratuit – Télévision écran plat – Coffre fort – Climatisation individuelle</p>
                 <div class="col {{ app.request.get('_route') == 'app_room_contact' }}">
-                    <a class="btn btn-lg m-3" id="btn-connexion" href="{{ path('app_room_contact', {'id': room.id}) }}">Réserver</a>
+                    <a class="btn btn-lg m-3 " id="btn-connexion" href="{{ path('app_room_contact', {'id': room.id}) }}">Réserver</a>
+                </div>
+
+                <div class="container">
+                    <div class="btn btn-lg m-3 btn-connexion" id="reviewFormContainer" style="display: none;">
+                        <h2>Laisser un avis</h2>
+                        
+                        {{ include('review/_form.html.twig', {'button_label': 'Envoyer', 'form': reviewForm}) }}
+                    </div>
+                    <button id="showReviewFormBtn">Laisser un avis</button>
                 </div>
             </div>
             <div class="row col-lg-6 col-md-7 col-11 mx-auto p-2">
@@ -41,6 +50,38 @@
     </div>
 
 {% endblock %}
-{% block javascripts %}
 
+{% block javascripts %}        
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Écouter le clic sur le bouton "Laisser un avis"
+            document.getElementById('showReviewFormBtn').addEventListener('click', function() {
+                // Afficher le formulaire
+                document.getElementById('reviewFormContainer').style.display = 'block';
+            });
+
+            // Écouter la soumission du formulaire
+            document.getElementById('reviewForm').addEventListener('submit', function(event) {
+                event.preventDefault(); // Empêcher la soumission du formulaire
+
+                // Récupérer les données du formulaire
+                var formData = new FormData(this);
+
+                // Envoyer les données via une requête AJAX
+                fetch('{{ path('roomDetail') }}', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Traiter la réponse
+                    console.log(data);
+                    // Par exemple, afficher un message de succès ou recharger la page
+                })
+                .catch(error => {
+                    console.error('Erreur lors de la soumission du formulaire:', error);
+                });
+            });
+        });
+    </script>
 {% endblock %}

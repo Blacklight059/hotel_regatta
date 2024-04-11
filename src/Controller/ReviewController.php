@@ -7,6 +7,7 @@ use App\Form\ReviewType;
 use App\Repository\ReviewRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -31,7 +32,6 @@ class ReviewController extends AbstractController
         }
 
         $entityManager->flush();
-
 
         return $this->render('review/index.html.twig', [
             'controller_name' => 'ReviewController',
@@ -91,5 +91,32 @@ class ReviewController extends AbstractController
             'controller_name' => 'ReviewController',
             'reviewId' => $reviewId,
         ]);
+    }
+
+       /**
+     * @Route("/submit-review", name="submit_review", methods={"POST"})
+     */
+    public function submitReview(Request $request): JsonResponse
+    {
+        // Récupérer les données du formulaire
+        $formData = $request->request->all();
+
+        // Ici, vous pouvez faire quelque chose avec les données du formulaire, comme les enregistrer en base de données
+        // Par exemple :
+        // $entityManager = $this->getDoctrine()->getManager();
+        // $review = new Review();
+        // $review->setPseudo($formData['pseudo']);
+        // $review->setComment($formData['comment']);
+        // $review->setRating($formData['rating']);
+        // $entityManager->persist($review);
+        // $entityManager->flush();
+
+        // Vous pouvez également retourner des données spécifiques que vous souhaitez afficher
+        $responseData = [
+            'message' => 'Votre avis a été soumis avec succès !',
+            'formData' => $formData,
+        ];
+
+        return new JsonResponse($responseData);
     }
 }

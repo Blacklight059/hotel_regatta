@@ -74,3 +74,10 @@ function scrollReviews() {
 
 // Appeler la fonction scrollReviews toutes les quelques secondes (par exemple, toutes les 5 secondes)
 setInterval(scrollReviews, 5000); // Définir l'intervalle de temps en millisecondes
+
+document.addEventListener("DOMContentLoaded", function(event) {
+  var reviews = document.querySelectorAll('.fade-in');
+  reviews.forEach(function(review) {
+      review.classList.add('show');
+  });
+});
