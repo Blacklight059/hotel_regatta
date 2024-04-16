@@ -28,9 +28,13 @@ class Room
     #[ORM\OneToMany(targetEntity: Images::class, mappedBy: 'room', orphanRemoval: true, cascade: ['persist'])]
     private Collection $images;
 
+    #[ORM\OneToMany(targetEntity: Review::class, mappedBy: 'room')]
+    private Collection $review;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
+        $this->review = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -98,6 +102,36 @@ class Room
             // set the owning side to null (unless already changed)
             if ($image->getRoom() === $this) {
                 $image->setRoom(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Review>
+     */
+    public function getReview(): Collection
+    {
+        return $this->review;
+    }
+
+    public function addReview(Review $review): static
+    {
+        if (!$this->review->contains($review)) {
+            $this->review->add($review);
+            $review->setRoom($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReview(Review $review): static
+    {
+        if ($this->review->removeElement($review)) {
+            // set the owning side to null (unless already changed)
+            if ($review->getRoom() === $this) {
+                $review->setRoom(null);
             }
         }
 

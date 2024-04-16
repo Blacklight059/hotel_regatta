@@ -112,14 +112,14 @@ nav {
     color: white;
 
   }
-  #reviewFormContainer {
+  #showReviewFormBtn {
     border: none;
     text-decoration: none;
     background: #CCD9E2;
   
   }
 
-#reviewFormContainer:hover {
+#showReviewFormBtn:hover {
     border: none;
     text-decoration: none;
     background: #6F4849;  
@@ -298,8 +298,9 @@ nav {
   }
 
 #show-star {
-    color: #75E6DA;
-    border-color: #05445E;
+    color: #D67940;
+    border-color: #285185;
+    ;
 }
 
 #card-car {

@@ -29,6 +29,9 @@ class Review
     #[ORM\Column(nullable: true)]
     private ?bool $validate = null;
 
+    #[ORM\ManyToOne(inversedBy: 'review')]
+    private ?Room $room = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,6 +93,18 @@ class Review
     public function setValidate(?bool $validate): static
     {
         $this->validate = $validate;
+
+        return $this;
+    }
+
+    public function getRoom(): ?Room
+    {
+        return $this->room;
+    }
+
+    public function setRoom(?Room $room): static
+    {
+        $this->room = $room;
 
         return $this;
     }

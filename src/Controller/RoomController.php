@@ -14,9 +14,6 @@ use App\Service\MailerService;
 use App\ServiceImages\PictureService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\DataTransformer\DateTimeToStringTransformer;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -144,20 +141,23 @@ class RoomController extends AbstractController
     {
         $review = new Review();
         $room = $roomRepository->findBy(['id' => $id])[0];
+        $reviews = $room->getReview();       
+        
         $form = $this->createForm(ReviewType::class, $review);
         $form->handleRequest($request);
     
         if ($form->isSubmitted() && $form->isValid()) {
+            $review->setRoom($room);
             $entityManager->persist($review);
             $entityManager->flush();
     
             $this->addFlash('success', 'Votre avis a été soumis avec succès !');
-            return $this->json(['message' => 'Votre avis a été soumis avec succès !']);
         }
     
         return $this->render('hotel/hotel_detail.html.twig', [
             'controller_name' => 'roomDetail',
             'room' => $room,
+            'reviews' => $reviews,
             'reviewForm' => $form->createView()
         ]);
     }

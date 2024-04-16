@@ -18,14 +18,7 @@
                     <a class="btn btn-lg m-3 " id="btn-connexion" href="{{ path('app_room_contact', {'id': room.id}) }}">Réserver</a>
                 </div>
 
-                <div class="container">
-                    <div class="btn btn-lg m-3 btn-connexion" id="reviewFormContainer" style="display: none;">
-                        <h2>Laisser un avis</h2>
-                        
-                        {{ include('review/_form.html.twig', {'button_label': 'Envoyer', 'form': reviewForm}) }}
-                    </div>
-                    <button id="showReviewFormBtn">Laisser un avis</button>
-                </div>
+
             </div>
             <div class="row col-lg-6 col-md-7 col-11 mx-auto p-2">
                 <div id="carouselExampleFade" class="carousel slide carousel-fade">
@@ -45,6 +38,34 @@
                         <span class="visually-hidden">Next</span>
                     </button>
                 </div>               
+            </div>
+            <div class="row col-lg-6 col-md-7 col-11 mx-auto p-2">
+                <div class="container">
+                    <div class="m-3 p-3" id="reviewFormContainer" style="display: none;">
+                        <h2>Laisser un avis</h2>
+                        {{ include('review/_form.html.twig', {'button_label': 'Envoyer', 'form': reviewForm}) }}
+                    </div>
+                    <button id="showReviewFormBtn">Laisser un avis</button>
+                </div>
+            </div>
+            <div id="reviewContainer" class="row justify-content-between align-items-stretch text-center text-lg-start p-3">
+                {% for review in reviews %}
+                    {% if(review.validate == true) %}
+                        <div class="col-lg-3 col-md-5 col-12 mb-4 text-center justify-content-center shadow fade-in">
+                            <h4>{{ review.pseudo }}</h4>
+                            <div class="rating-container theme-krajee-fas rating-sm m-3">
+                                {% for i in 1..review.rating %}
+                                    <span class="star">
+                                        <i id="show-star" class="fas fa-star"></i>
+                                    </span>
+                                {% endfor %}
+                            </div>
+                            <div class="d-inline align-text-top">
+                                <p>{{ review.comment }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
             </div>
         </div>
     </div>

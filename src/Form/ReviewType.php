@@ -1,5 +1,7 @@
 <?php
 namespace App\Form;
+
+use Gregwar\CaptchaBundle\Type\CaptchaType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -58,6 +60,12 @@ class ReviewType extends AbstractType
                     'cols' => "50",
                 ],
             ])
+            ->add('captcha', CaptchaType::class, array(
+                'label' => 'Veuillez entrer le texte ci-dessus',
+                'width' => 200,
+                'height' => 50,
+                'length' => 6, // Longueur du CAPTCHA
+            ))
         ;
     }
     public function configureOptions(OptionsResolver $resolver)
