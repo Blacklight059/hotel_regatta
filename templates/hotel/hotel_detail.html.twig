@@ -7,13 +7,14 @@
         <div class="row mt-4 p-3">                
             <div class="col-lg-3 col-md-4 col-11 mx-auto">
                 <h5 class="quotes p-4 shadow">
-                    La chambre classique
+                    {{ room.title }}
                 </h5>
-                <p>Chambre double pour 1 ou 2 personnes au rez de chaussée ou à l’étage – 13 à 15 m²</p>
-                <p>Vue côté cour</p>
-                <p>Lit grand confort  160×200</p>
-                <p>Salle de bain avec douche à l’italienne – Chauffe serviettes- Sèche-cheveux – Produits de toilette</p>
-                <p>Wi-Fi gratuit – Télévision écran plat – Coffre fort – Climatisation individuelle</p>
+                <p>
+                    {{ room.content }}
+                </p>
+                <p>
+                    A partir de {{ room.price }} € la nuit
+                </p>
                 <div class="col {{ app.request.get('_route') == 'app_room_contact' }}">
                     <a class="btn btn-lg m-3 " id="btn-connexion" href="{{ path('app_room_contact', {'id': room.id}) }}">Réserver</a>
                 </div>
@@ -45,7 +46,7 @@
                         <h2>Laisser un avis</h2>
                         {{ include('review/_form.html.twig', {'button_label': 'Envoyer', 'form': reviewForm}) }}
                     </div>
-                    <button id="showReviewFormBtn">Laisser un avis</button>
+                    <button class="m-3 p-3" id="showReviewFormBtn">Laisser un avis</button>
                 </div>
             </div>
             <div id="reviewContainer" class="row justify-content-between align-items-stretch text-center text-lg-start p-3">

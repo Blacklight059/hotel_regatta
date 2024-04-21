@@ -173,6 +173,7 @@ class RoomController extends AbstractController
         // contact form for room
         $room = $roomRepository->findBy(['id' => $id])[0];
         $roomName = $room->getTitle();
+        
         $form = $this->createForm(ContactType::class);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {

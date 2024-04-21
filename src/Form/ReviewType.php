@@ -1,7 +1,8 @@
 <?php
 namespace App\Form;
 
-use Gregwar\CaptchaBundle\Type\CaptchaType;
+use Karser\Recaptcha3Bundle\Form\Recaptcha3Type;
+use Karser\Recaptcha3Bundle\Validator\Constraints\Recaptcha3;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -32,13 +33,13 @@ class ReviewType extends AbstractType
             ])
             ->add('email',EmailType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control m-2'
                 ],
                 'label' => 'E-mail'
             ])
             ->add('pseudo',TextType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control m-2'
                 ],
                 'label' => 'Pseudo'
             ])
@@ -55,17 +56,16 @@ class ReviewType extends AbstractType
                     ]),
                 ],
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control m-2',
                     'rows' => "10",
                     'cols' => "50",
                 ],
             ])
-            ->add('captcha', CaptchaType::class, array(
-                'label' => 'Veuillez entrer le texte ci-dessus',
-                'width' => 200,
-                'height' => 50,
-                'length' => 6, // Longueur du CAPTCHA
-            ))
+            ->add('captcha', Recaptcha3Type::class, [
+                'constraints' => new Recaptcha3(),
+                'action_name' => 'homepage',
+                'locale' => 'fr',
+            ])
         ;
     }
     public function configureOptions(OptionsResolver $resolver)

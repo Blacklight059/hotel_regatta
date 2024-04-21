@@ -1,7 +1,6 @@
 <?php
 namespace App\Form;
 
-use Gregwar\CaptchaBundle\Type\CaptchaType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -12,6 +11,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Karser\Recaptcha3Bundle\Form\Recaptcha3Type;
+use Karser\Recaptcha3Bundle\Validator\Constraints\Recaptcha3;
+
 
 class ContactType extends AbstractType
 {
@@ -20,7 +22,7 @@ class ContactType extends AbstractType
         $builder
             ->add('name',TextType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control m-2'
                 ],
                 'label' => 'Nom',
                 'constraints' => [
@@ -31,7 +33,7 @@ class ContactType extends AbstractType
             ])
             ->add('firstname',TextType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control m-2'
                 ],
                 'label' => 'Prénom',
                 'constraints' => [
@@ -42,7 +44,7 @@ class ContactType extends AbstractType
             ])
             ->add('email',EmailType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control m-2'
                 ],
                 'label' => 'E-mail',
                 'constraints' => [
@@ -53,7 +55,7 @@ class ContactType extends AbstractType
             ])
             ->add('phoneNumber',TelType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control m-2'
                 ],
                 'label' => 'Téléphone',
                 'constraints' => [
@@ -75,7 +77,7 @@ class ContactType extends AbstractType
                     ]),
                 ],
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control m-2',
                     'rows' => "10",
                     'cols' => "50",
                 ],
@@ -90,12 +92,11 @@ class ContactType extends AbstractType
                 'widget' => 'single_text',
                 'attr' => ['class' => 'js-datepicker'],
             ])
-            ->add('captcha', CaptchaType::class, array(
-                'label' => 'Veuillez entrer le texte ci-dessus',
-                'width' => 200,
-                'height' => 50,
-                'length' => 6, // Longueur du CAPTCHA
-            ))
+            ->add('captcha', Recaptcha3Type::class, [
+                'constraints' => new Recaptcha3(),
+                'action_name' => 'homepage',
+                'locale' => 'fr',
+            ])
         ;
     }
     public function configureOptions(OptionsResolver $resolver)
