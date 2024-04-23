@@ -81,3 +81,42 @@ document.addEventListener("DOMContentLoaded", function(event) {
       review.classList.add('show');
   });
 });
+
+document.addEventListener("DOMContentLoaded", function(event) {
+  var reviews = document.querySelectorAll('.fade-in');
+  reviews.forEach(function(review) {
+      review.classList.add('show');
+  });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Écouter le clic sur le bouton "Laisser un avis"
+  document.getElementById('showReviewFormBtn').addEventListener('click', function() {
+      // Afficher le formulaire
+      document.getElementById('reviewFormContainer').style.display = 'block';
+  });
+
+  // Écouter la soumission du formulaire
+  document.getElementById('reviewForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Empêcher la soumission du formulaire
+
+      // Récupérer les données du formulaire
+      var formData = new FormData(this);
+
+      // Envoyer les données via une requête AJAX
+      fetch('{{ path("roomDetail") }}', {
+          method: 'POST',
+          body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+          // Traiter la réponse
+          console.log(data);
+          // Par exemple, afficher un message de succès ou recharger la page
+      })
+      .catch(error => {
+          console.error('Erreur lors de la soumission du formulaire:', error);
+      });
+  });
+});
+
