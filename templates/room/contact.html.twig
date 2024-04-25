@@ -7,3 +7,6 @@
     {{ include('room/_contact.html.twig', {'button_label': 'Envoyer'}) }}
 </div>
 {% endblock %}
+{% block javascripts %}
+    {{ encore_entry_script_tags('contact') }}
+{% endblock %}
